@@ -6,6 +6,7 @@ static void c_rand(benchmark::State& state) {
 	for (auto _:state) {
 		auto v = std::rand();
 		benchmark::DoNotOptimize(v);
+		benchmark::ClobberMemory();
 	}
 	state.SetItemsProcessed(state.iterations());
 }

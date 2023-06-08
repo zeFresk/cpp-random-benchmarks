@@ -8,6 +8,7 @@ static void pcg_cpp(benchmark::State& state) {
 	for (auto _:state) {
 		auto v = gen();
 		benchmark::DoNotOptimize(v);
+		benchmark::ClobberMemory();
 	}
 	state.SetItemsProcessed(state.iterations());
 }
