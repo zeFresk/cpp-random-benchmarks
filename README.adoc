@@ -15,12 +15,12 @@ All these results were compiled over 100 hundred runs (`--benchmark_repetitions=
 |===
 | PRNG (link) | Mean time per generation (user) | Mean generation per second | Remarks
 | https://github.com/david-cortes/xoshiro_cpp[xoshiro128++] | 1.06ns ± 0.002 ns | 946.757M/s ± 0.719M/s |
-| **https://github.com/david-cortes/xoshiro_cpp[xoshiro256++]** | **1.06ns ± 0.002 ns** | **946.704M/s ± 0.581M/s** | **Very fast, good quality, 400 lines**
+| **https://github.com/david-cortes/xoshiro_cpp[xoshiro256++]** | **1.06ns ± 0.002 ns** | **946.704M/s ± 0.581M/s** | **Fastest for 64 bits, good quality, 400 lines**
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32] | 1.09ns ± 0.010ns | 916.834M/s ± 8.424M/s |
 | **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32_fast]** | **0.933ns ± 0.006ns** | **1071.970M/s ± 6.220M/s** | **Fastest for 32 bits**
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.09ns ± 0.010ns | 916.063M/s ± 8.155M/s |
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64] | 1.98ns ± 0.013ns | 504.325M/s ± 3.121M/s |
-| **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_fast]** | **1.31ns ± 0.012ns** | **763.500M/s ± 6.629M/s** | **Fastest for 64 bits**
+| **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_fast]** | **1.31ns ± 0.012ns** | **763.500M/s ± 6.629M/s** |
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.98ns ± 0.008ns | 504.750M/s ± 2.064M/s |
 | https://github.com/wjakob/pcg32[wjakob pcg32] | 1.06ns ± 0.012ns | 940.393M/s ± 10.598M/s | Not that much faster than pcg-cpp
 | **https://github.com/wjakob/pcg32[wjakob pcg32_8]** | **8.48ns ± 0.112ns** | **944.200M/s ± 12.215M/s** | **Fastest if your CPU have AVX**, mine does not
@@ -41,7 +41,7 @@ image::res/results.png[Plot of the measured speed of PRNGs, align=center]
 
 === Conclusion
 
-`std::mt19937` and `std::mt19937_64` are the best standard C++ pseudo random number generators in the STL. However, https://www.pcg-random.org/[PCG] is superior in all aspects **for non-cryptographic** uses.
+`std::mt19937` and `std::mt19937_64` are the best standard C++ pseudo random number generators in the STL. However, https://www.pcg-random.org/[PCG] is superior in all aspects **for non-cryptographic** uses. https://prng.di.unimi.it/[xoshiro256++] is another very good choice for generating 64 bits random numbers, but it does not support multiple streams like PCG.
 
 `rand()` need to be avoided at all costs, it is very slow and its quality is bad.
 
