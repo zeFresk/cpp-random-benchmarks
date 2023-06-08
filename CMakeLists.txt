@@ -81,3 +81,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(pcg32)
 target_include_directories(random_benchmarks PUBLIC ${pcg32_SOURCE_DIR})
 
+# xoshiro
+FetchContent_Declare(
+	xoshiro_cpp
+	GIT_REPOSITORY https://github.com/david-cortes/xoshiro_cpp.git
+	GIT_TAG d2c7ba4
+)
+FetchContent_MakeAvailable(xoshiro_cpp)
+target_include_directories(random_benchmarks PUBLIC ${xoshiro_cpp_SOURCE_DIR})
+

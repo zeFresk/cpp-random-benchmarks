@@ -14,6 +14,8 @@ All these results were compiled over 100 hundred runs (`--benchmark_repetitions=
 .Table of results
 |===
 | PRNG (link) | Mean time per generation (user) | Mean generation per second | Remarks
+| https://github.com/david-cortes/xoshiro_cpp[xoshiro128++] | 1.06ns ± 0.002 ns | 946.757M/s ± 0.719M/s |
+| **https://github.com/david-cortes/xoshiro_cpp[xoshiro256++]** | **1.06ns ± 0.002 ns** | **946.704M/s ± 0.581M/s** | **Very fast, good quality, 400 lines**
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32] | 1.09ns ± 0.010ns | 916.834M/s ± 8.424M/s |
 | **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32_fast]** | **0.933ns ± 0.006ns** | **1071.970M/s ± 6.220M/s** | **Fastest for 32 bits**
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.09ns ± 0.010ns | 916.063M/s ± 8.155M/s |
