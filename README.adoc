@@ -3,7 +3,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-This repository provides an easy way to compare some common pseudo random number generators (PRNGS) used in C++. It also provides my results running the benchmarks for those wanting a quick answer. To reproduce my results and test for yourself, see section <<Test for yourself>>.
+This repository provides an easy way to compare some common pseudo random number generators (PRNGS) used in C++. It also provides my results running the benchmarks for those wanting a quick answer. To reproduce my results and test for yourself, see section <<Test for yourself>>. As of now, the tested PRNG are: Mersenne twister, Linear Congruential Engine, xoshiro / xorshift*, PCG, rand(), Substract with carry and some other more exotic engines.
 
 WARNING: Most of these algorithms should not be used in a context where security is required.
 
