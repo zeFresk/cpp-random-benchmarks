@@ -48,6 +48,19 @@ target_link_options(random_benchmarks PUBLIC
 	#$<$<CXX_COMPILER_ID:Clang>:-fuse-ld=lld>
 	)
 
+include(FetchContent)
+cmake_policy(SET CMP0135 NEW)
+
+# Google test
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.13.0.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 # GoogleBenchmark
 FetchContent_Declare(
 	googlebenchmark
@@ -55,3 +68,22 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googlebenchmark)
 target_link_libraries(random_benchmarks benchmark::benchmark benchmark::benchmark_main)
+
+# pcg-cpp
+FetchContent_Declare(
+	pcg-cpp
+	GIT_REPOSITORY https://github.com/imneme/pcg-cpp.git
+	GIT_TAG 428802d
+)
+FetchContent_MakeAvailable(pcg-cpp)
+target_include_directories(random_benchmarks PUBLIC ${pcg-cpp_SOURCE_DIR})
+
+# pcg32
+FetchContent_Declare(
+	pcg32
+	GIT_REPOSITORY https://github.com/wjakob/pcg32.git
+	GIT_TAG 70099ea
+)
+FetchContent_MakeAvailable(pcg32)
+target_include_directories(random_benchmarks PUBLIC ${pcg32_SOURCE_DIR})
+
