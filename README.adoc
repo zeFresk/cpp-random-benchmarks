@@ -39,7 +39,7 @@ image::res/results.png[Plot of the measured speed of PRNGs, align=center]
 
 === Conclusion
 
-`std::mt19937` and `std::mt19937_64` are the best standard C++ pseudo random number generators in the STL. However, https://www.pcg-random.org/[PCG] is superior on all aspects **for non-cryptographic** uses.
+`std::mt19937` and `std::mt19937_64` are the best standard C++ pseudo random number generators in the STL. However, https://www.pcg-random.org/[PCG] is superior in all aspects **for non-cryptographic** uses.
 
 `rand()` need to be avoided at all costs, it is very slow and its quality is bad.
 
