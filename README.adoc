@@ -1,7 +1,9 @@
-= A simple speed comparison & benchmark of differents C++ random number generators (PRNG)
+= Speed comparison & benchmark of differents C++ random number generators (PRNG)
 :stem:
 
-I was struggling to find a basic benchmark of differents C++ random number generator, so I wrote my own using google-benchmark.
+This repository provides an easy way to compare some common pseudo random number generators (PRNGS) used in C++. It also provides my results running the benchmarks for those wanting a quick answer. To reproduce my results and test for yourself, see section <<Test for yourself>>.
+
+IMPORTANT: Most of these algorithms should not be used in a context where security is required.
 
 == Results
 
@@ -11,10 +13,11 @@ All these results were compiled over 100 hundred runs (`--benchmark_repetitions=
 |===
 | PRNG (link) | Mean time per generation (user) | Mean generation per second | Remarks
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32] | 1.09ns stem:[\pm] 0.010ns | 916.834M/s stem:[\pm] 8.424M/s |
-| **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32_fast]** | **0.933ns stem:[\pm] 0.006ns** | **1071.97M/s stem:[\pm] 6.220M/s** | **Fastest for 32 bits**
+| **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg32_fast]** | **0.933ns stem:[\pm] 0.006ns** | **1071.970M/s stem:[\pm] 6.220M/s** | **Fastest for 32 bits**
+| https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.09ns stem:[\pm] 0.010ns | 916.063M/s stem:[\pm] 8.155M/s |
 | https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64] | 1.98ns stem:[\pm] 0.013ns | 504.325M/s stem:[\pm] 3.121M/s |
 | **https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_fast]** | **1.31ns stem:[\pm] 0.012ns** | **763.500M/s stem:[\pm] 6.629M/s** | **Fastest for 64 bits**
-| https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.98ns stem:[\pm] 0.008ns | 504.75M/s stem:[\pm] 2.064M/s |
+| https://github.com/imneme/pcg-cpp[pcg_cpp::pcg64_oneseq] | 1.98ns stem:[\pm] 0.008ns | 504.750M/s stem:[\pm] 2.064M/s |
 | https://github.com/wjakob/pcg32[wjakob pcg32] | 1.06ns stem:[\pm] 0.012ns | 940.393M/s stem:[\pm] 10.598M/s | Not that much faster than pcg-cpp
 | **https://github.com/wjakob/pcg32[wjakob pcg32_8]** | **8.48ns stem:[\pm] 0.112ns** | **944.200M/s stem:[\pm] 12.215M/s** | **Fastest if your CPU have AVX**, mine does not
 | https://burtleburtle.net/bob/rand/smallprng.html[burtle burtle C random] | 2.79ns stem:[\pm] 0.023ns | 358.876M/s stem:[\pm] 2.627M/s | 20 lines implementation
@@ -30,27 +33,32 @@ All these results were compiled over 100 hundred runs (`--benchmark_repetitions=
 | https://en.cppreference.com/w/cpp/numeric/random/shuffle_order_engine[C++ STL std::knuth_b (SOE)] | 14.9ns stem:[\pm] 0.153ns | 66.990M stem:[\pm] 0.660M/s | Better quality than minstd_rand but as slow as rand
 |===
 
+image::res/results.png[Plot of the measured speed of PRNGs, align=center]
+
+=== Conclusion
+
+`std::mt19937` and `std::mt19937_64` are the best standard C++ pseudo random number generators in the STL. However, https://www.pcg-random.org/[PCG] is superior on all aspects **for non-cryptographic** uses.
+
+`rand()` need to be avoided at all costs, it is very slow and its quality is bad.
 
 
-== Test yourself
+== Test for yourself
 
 CMake will automatically download all dependencies from other repositories. You just need to have CMake and C++ compiler installed.
 
 1. Clone this repository using git
-
++
 ```bash
 git clone https://github.com/zeFresk/cpp-random-benchmarks.git
 ```
-
 2. Compile using CMake :
-
++
 ```bash
 cmake .
 cmake --build .
 ```
-
 3. Run and publish your results
-
-```
++
+```bash
 ./random_benchmarks
 ```
