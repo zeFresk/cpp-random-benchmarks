@@ -1,5 +1,5 @@
 = Speed comparison & benchmark of differents C++ random number generators (PRNG)
-:stem:
+:stem: latexmath
 
 This repository provides an easy way to compare some common pseudo random number generators (PRNGS) used in C++. It also provides my results running the benchmarks for those wanting a quick answer. To reproduce my results and test for yourself, see section <<Test for yourself>>.
 
